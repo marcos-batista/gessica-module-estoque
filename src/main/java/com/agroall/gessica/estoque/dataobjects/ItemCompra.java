@@ -1,24 +1,11 @@
 package com.agroall.gessica.estoque.dataobjects;
 
-import com.agroall.gessica.dataobjects.aspects.Persistent;
-
-public class ItemCompra implements Persistent {
+public class ItemCompra {
 	
-	private Integer id;
 	private int quantidadeProdutos;
 	private Double precoItem;
 	
 	private ProdutoInsumo produto;
-	
-	@Override
-	public Integer getId() {
-		return this.id;
-	}
-
-	@Override
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	
 	public int getQuantidadeProdutos() {
 		return quantidadeProdutos;

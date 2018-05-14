@@ -3,19 +3,19 @@ package com.agroall.gessica.estoque.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.agroall.gessica.estoque.dataobjects.OrcamentoVenda;
-import com.agroall.gessica.estoque.repositories.OrcamentoVendaRepository;
+import com.agroall.gessica.estoque.dataobjects.ProdutoInsumo;
+import com.agroall.gessica.estoque.repositories.ProdutoInsumoRepository;
 import com.agroall.gessica.repositories.Repository;
 import com.agroall.gessica.services.ServiceImpl;
 
 @Service
-public class OrcamentoVendaService extends ServiceImpl<OrcamentoVenda> {
+public class ProdutoInsumoService extends ServiceImpl<ProdutoInsumo> {
 	
-	@Autowired private OrcamentoVendaRepository repository;
+	@Autowired private ProdutoInsumoRepository repository;
 	
 	@Override
-	public OrcamentoVenda factoryNewDataObject() {
-		return new OrcamentoVenda();
+	public ProdutoInsumo factoryNewDataObject() {
+		return new ProdutoInsumo();
 	}
 	
 	@Override
