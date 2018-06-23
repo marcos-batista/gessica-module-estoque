@@ -12,6 +12,8 @@ import com.agroall.gessica.dataobjects.aspects.Persistent;
 public class OrdemCompra extends Compra implements Persistent<String> {
 	
 	@Id private String id;
+	private Double precoCalculado;
+	
 	private Collection<ItemOrdemCompra> itens;
 	
 	public OrdemCompra() {
@@ -28,6 +30,19 @@ public class OrdemCompra extends Compra implements Persistent<String> {
 		this.id = id;
 	}
 	
+	public Double getPrecoCalculado() {
+		return precoCalculado;
+	}
+	
+	public void setPrecoCalculado(Double precoCalculado) {}
+	
+	protected void calculatePreco() {
+		this.precoCalculado = 0d;
+		for (ItemOrdemCompra itemOrdemCompra : this.itens) {
+			this.precoCalculado += itemOrdemCompra.getPrecoCalculado();
+		}
+	}
+	
 	public Collection<ItemOrdemCompra> getItens() {
 		return itens;
 	}
@@ -39,6 +54,7 @@ public class OrdemCompra extends Compra implements Persistent<String> {
 	public void addItemOrcamentoCompra(ItemOrdemCompra itemOrcamentoCompra) {
 		if(this.itens == null) { this.itens = factoryCollectionItemOrdemCompra(); }
 		this.itens.add(itemOrcamentoCompra);
+		calculatePreco();
 	}
 	
 	protected Collection<ItemOrdemCompra> factoryCollectionItemOrdemCompra() {

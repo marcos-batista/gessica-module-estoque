@@ -1,16 +1,14 @@
 package com.agroall.gessica.estoque.dataobjects;
 
-import java.util.Calendar;
-
 public class Compra {
 	
-	private Calendar data;
+	private Long data;
 	
-	public Calendar getData() {
+	public Long getData() {
 		return data;
 	}
 	
-	public void setData(Calendar data) {
+	public void setData(Long data) {
 		this.data = data;
 	}
 	

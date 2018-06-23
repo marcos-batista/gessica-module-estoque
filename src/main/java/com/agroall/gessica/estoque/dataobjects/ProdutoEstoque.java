@@ -10,6 +10,8 @@ public class ProdutoEstoque extends com.agroall.gessica.dataobjects.ProdutoEstoq
 	
 	@Id private String id;
 	
+	private ProdutoInsumo produtoInsumo;
+	
 	@Override
 	public String getId() {
 		return this.id;
@@ -18,6 +20,14 @@ public class ProdutoEstoque extends com.agroall.gessica.dataobjects.ProdutoEstoq
 	@Override
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public ProdutoInsumo getProdutoInsumo() {
+		return produtoInsumo;
+	}
+	
+	public void setProdutoInsumo(ProdutoInsumo produtoInsumo) {
+		this.produtoInsumo = produtoInsumo;
 	}
 	
 }
