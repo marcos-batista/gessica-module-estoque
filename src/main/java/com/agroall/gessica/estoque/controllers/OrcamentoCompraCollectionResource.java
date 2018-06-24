@@ -14,7 +14,7 @@ import com.agroall.gessica.estoque.services.OrcamentoCompraService;
 import com.agroall.gessica.services.Service;
 
 @RestController
-@RequestMapping("/orcamentoscompra")
+@RequestMapping("/orcamentos")
 @CrossOrigin
 public class OrcamentoCompraCollectionResource extends DataCollectionResourceControllerImpl<OrcamentoCompra> {
 	

@@ -9,52 +9,52 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.agroall.gessica.controllers.DataObjectResourceControllerImpl;
-import com.agroall.gessica.estoque.dataobjects.ProdutoInsumo;
-import com.agroall.gessica.estoque.services.ProdutoInsumoService;
+import com.agroall.gessica.estoque.dataobjects.OrcamentoCompra;
+import com.agroall.gessica.estoque.services.OrcamentoCompraService;
 import com.agroall.gessica.services.Service;
 
 @RestController
-@RequestMapping("/produtoinsumo")
+@RequestMapping("/orcamento")
 @CrossOrigin
-public class ProdutoInsumoResource extends DataObjectResourceControllerImpl<ProdutoInsumo> {
-	
-	@Autowired private ProdutoInsumoService service;
+public class OrcamentoCompraDataResource extends DataObjectResourceControllerImpl<OrcamentoCompra> {
+
+	@Autowired private OrcamentoCompraService service;
 	
 	@Override
-	protected Service<ProdutoInsumo> getService() {
-		return this.service;	
+	protected Service<OrcamentoCompra> getService() {
+		return this.service;
 	}
 	
 	@Override
 	@RequestMapping(method = RequestMethod.GET)
-	public ProdutoInsumo doGet() {
+	public OrcamentoCompra doGet() {
 		return super.doGet();
 	}
 	
 	@Override
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json", produces = "application/json")
-	public ProdutoInsumo doPost(@RequestBody ProdutoInsumo produtoInsumo) {
-		produtoInsumo.setId(null);
-		return super.doPost(produtoInsumo);
+	public OrcamentoCompra doPost(@RequestBody OrcamentoCompra orcamentoCompra) {
+		orcamentoCompra.setId(null);
+		return super.doPost(orcamentoCompra);
 	}
 	
 	@Override
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ProdutoInsumo doGet(@PathVariable(value = "id") String id) {
+	public OrcamentoCompra doGet(@PathVariable(value = "id") String id) {
 		return super.doGet(id);
 	}
 	
 	@Override
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
-	public ProdutoInsumo doPut(@PathVariable(value = "id") String id, @RequestBody ProdutoInsumo produtoInsumo) {
-		produtoInsumo.setId(id);
-		return super.doPut(id, produtoInsumo);
+	public OrcamentoCompra doPut(@PathVariable(value = "id") String id, @RequestBody OrcamentoCompra orcamentoCompra) {
+		orcamentoCompra.setId(id);
+		return super.doPut(id, orcamentoCompra);
 	}
 	
 	@Override
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
-	public ProdutoInsumo doDelete(ProdutoInsumo produtoInsumo) {
-		return super.doDelete(produtoInsumo);
+	public OrcamentoCompra doDelete(OrcamentoCompra orcamentoCompra) {
+		return super.doDelete(orcamentoCompra);
 	}
-	
+
 }
