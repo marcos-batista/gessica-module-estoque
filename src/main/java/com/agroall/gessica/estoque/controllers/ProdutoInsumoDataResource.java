@@ -14,8 +14,8 @@ import com.agroall.gessica.estoque.services.ProdutoInsumoService;
 import com.agroall.gessica.services.Service;
 
 @RestController
-@RequestMapping("/produto")
 @CrossOrigin
+@RequestMapping("/produto")
 public class ProdutoInsumoDataResource extends DataObjectResourceControllerImpl<ProdutoInsumo> {
 	
 	@Autowired private ProdutoInsumoService service;
@@ -55,6 +55,30 @@ public class ProdutoInsumoDataResource extends DataObjectResourceControllerImpl<
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE, consumes = "application/json", produces = "application/json")
 	public ProdutoInsumo doDelete(ProdutoInsumo produtoInsumo) {
 		return super.doDelete(produtoInsumo);
+	}
+	
+	@RequestMapping(value = "/{id}/estoque/credito/{quantidade}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	public ProdutoInsumo doCreditarEstoque(@PathVariable(value = "id") String id, @PathVariable(value = "quantidade") String quantidade, @RequestBody ProdutoInsumo produtoInsumo) {
+		produtoInsumo.setId(id);
+		creditarEstoque(produtoInsumo, quantidade);
+		return super.doGet(produtoInsumo.getId());
+	}
+	
+	protected void creditarEstoque(ProdutoInsumo produtoInsumo, String quantidade) {
+		Integer quantidadeAsNumber = Integer.parseInt(quantidade);
+		this.service.creditarEstoque(produtoInsumo, quantidadeAsNumber);
+	}
+	
+	@RequestMapping(value = "/{id}/estoque/debito/{quantidade}", method = RequestMethod.PUT, consumes = "application/json", produces = "application/json")
+	public ProdutoInsumo doDebitarEstoque(@PathVariable(value = "id") String id, @PathVariable(value = "quantidade") String quantidade, @RequestBody ProdutoInsumo produtoInsumo) {
+		produtoInsumo.setId(id);
+		debitarEstoque(produtoInsumo, quantidade);
+		return super.doGet(produtoInsumo.getId());
+	}
+	
+	protected void debitarEstoque(ProdutoInsumo produtoInsumo, String quantidade) {
+		Integer quantidadeAsNumber = Integer.parseInt(quantidade);
+		this.service.debitarEstoque(produtoInsumo, quantidadeAsNumber);
 	}
 	
 }

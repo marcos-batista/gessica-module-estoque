@@ -3,6 +3,7 @@ package com.agroall.gessica.estoque.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.agroall.gessica.estoque.dataobjects.ProdutoEstoque;
 import com.agroall.gessica.estoque.dataobjects.ProdutoInsumo;
 import com.agroall.gessica.estoque.repositories.ProdutoInsumoRepository;
 import com.agroall.gessica.repositories.Repository;
@@ -27,5 +28,26 @@ public class ProdutoInsumoService extends ServiceImpl<ProdutoInsumo> {
 	protected Repository factoryRepository() {
 		return this.repository;
 	}
-
+	
+	@Override
+	protected void validateBeforeInsertOrUpdate(ProdutoInsumo produtoInsumo) {
+		super.validateBeforeInsertOrUpdate(produtoInsumo);
+		ProdutoEstoque estoque = produtoInsumo.getEstoque();
+		if(estoque == null) { throw new RuntimeException("Estoque do produto não foi informado"); }
+	}
+	
+	public void creditarEstoque(ProdutoInsumo produtoInsumo, int quantidade) {
+		produtoInsumo = findById(produtoInsumo.getId());
+		ProdutoEstoque produtoEstoque = produtoInsumo.getEstoque();
+		produtoEstoque.creditar(quantidade);
+		update(produtoInsumo);
+	}
+	
+	public void debitarEstoque(ProdutoInsumo produtoInsumo, int quantidade) {
+		produtoInsumo = findById(produtoInsumo.getId());
+		ProdutoEstoque produtoEstoque = produtoInsumo.getEstoque();
+		produtoEstoque.debitar(quantidade);
+		update(produtoInsumo);
+	}
+	
 }

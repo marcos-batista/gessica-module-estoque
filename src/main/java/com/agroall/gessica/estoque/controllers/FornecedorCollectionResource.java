@@ -14,8 +14,8 @@ import com.agroall.gessica.estoque.services.FornecedorService;
 import com.agroall.gessica.services.Service;
 
 @RestController
-@RequestMapping("/fornecedores")
 @CrossOrigin
+@RequestMapping("/fornecedores")
 public class FornecedorCollectionResource extends DataCollectionResourceControllerImpl<Fornecedor> {
 	
 	@Autowired private FornecedorService service;

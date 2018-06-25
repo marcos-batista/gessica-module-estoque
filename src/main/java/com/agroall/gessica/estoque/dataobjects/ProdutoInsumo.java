@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.agroall.gessica.dataobjects.aspects.Persistent;
 
-@Document(collection = "produtosinsumo")
+@Document(collection = "insumos")
 public class ProdutoInsumo extends com.agroall.gessica.dataobjects.ProdutoInsumo implements Persistent<String> {
 	
 	@Id private String id;
@@ -16,6 +16,7 @@ public class ProdutoInsumo extends com.agroall.gessica.dataobjects.ProdutoInsumo
 	
 	private Fornecedor fornecedor;
 	private Collection<ItemCompra> itens;
+	private ProdutoEstoque estoque;
 	
 	@Override
 	public String getId() {
@@ -58,6 +59,17 @@ public class ProdutoInsumo extends com.agroall.gessica.dataobjects.ProdutoInsumo
 	
 	protected Collection<ItemCompra> factoryColletionItemCompra() {
 		return new HashSet<ItemCompra>();
+	}
+	
+	public ProdutoEstoque getEstoque() {
+		return estoque;
+	}
+	
+	public void setEstoque(ProdutoEstoque estoque) {
+		this.estoque = estoque;
+		if(this.estoque == null) return;
+		this.estoque.setCodigo(getCodigo());
+		this.estoque.setDescricao(getDescricao());
 	}
 	
 }
