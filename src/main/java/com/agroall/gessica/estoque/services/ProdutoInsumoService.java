@@ -30,10 +30,25 @@ public class ProdutoInsumoService extends ServiceImpl<ProdutoInsumo> {
 	}
 	
 	@Override
+	public ProdutoInsumo insert(ProdutoInsumo produtoInsumo) {
+		produtoInsumo = super.insert(produtoInsumo);
+		produtoInsumo.setCodigo(produtoInsumo.getId());
+		update(produtoInsumo);
+		return produtoInsumo;
+	}
+	
+	protected String resolveCodigoProduto(ProdutoInsumo produtoInsumo) {
+		return produtoInsumo.getId();
+	}
+	
+	@Override
 	protected void validateBeforeInsertOrUpdate(ProdutoInsumo produtoInsumo) {
 		super.validateBeforeInsertOrUpdate(produtoInsumo);
+		if(produtoInsumo.getDescricao() == null || produtoInsumo.getDescricao().trim().isEmpty()) {
+			throw new RuntimeException("Descrição do produto não foi informada!");
+		}
 		ProdutoEstoque estoque = produtoInsumo.getEstoque();
-		if(estoque == null) { throw new RuntimeException("Estoque do produto não foi informado"); }
+		if(estoque == null) { throw new RuntimeException("Estoque do produto não foi informado!"); }
 	}
 	
 	public void creditarEstoque(ProdutoInsumo produtoInsumo, int quantidade) {
