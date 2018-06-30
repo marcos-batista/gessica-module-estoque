@@ -29,14 +29,6 @@ public class ProdutoInsumoService extends ServiceImpl<ProdutoInsumo> {
 		return this.repository;
 	}
 	
-	@Override
-	public ProdutoInsumo insert(ProdutoInsumo produtoInsumo) {
-		produtoInsumo = super.insert(produtoInsumo);
-		produtoInsumo.setCodigo(produtoInsumo.getId());
-		update(produtoInsumo);
-		return produtoInsumo;
-	}
-	
 	protected String resolveCodigoProduto(ProdutoInsumo produtoInsumo) {
 		return produtoInsumo.getId();
 	}
